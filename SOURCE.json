@@ -1,0 +1,6 @@
+{
+  "source_commit": "b0f3a4197986f126b09fe832ad5111cab59939b1",
+  "archive_sha256": "40feab2ccd5d746b1d8f72b2456f54c8fac45071b5dd84c1aa8ccfe5189d96c3",
+  "tests_passed": 146,
+  "packaging": "Tracked source snapshot; Docker ADD extracts original directory structure. No runtime secrets or databases included."
+}
