@@ -11,6 +11,8 @@ COPY dashboard-update.py /app/dashboard-update.py
 RUN python3 /app/dashboard-update.py
 COPY non-referral-admin-update.py /app/non-referral-admin-update.py
 RUN python3 /app/non-referral-admin-update.py
+COPY viewer-access-update.py /app/viewer-access-update.py
+RUN python3 /app/viewer-access-update.py
 ENV NODE_ENV=production TZ=America/Los_Angeles TRANSCRIBE_LOCAL=true WHISPER_MODEL_DIR=/opt/whisper/tiny.en HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 EXPOSE 3000
 USER node
