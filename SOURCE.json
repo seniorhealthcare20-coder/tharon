@@ -1,6 +1,6 @@
 {
-  "source_commit": "b0f3a4197986f126b09fe832ad5111cab59939b1",
-  "archive_sha256": "40feab2ccd5d746b1d8f72b2456f54c8fac45071b5dd84c1aa8ccfe5189d96c3",
-  "tests_passed": 146,
-  "packaging": "Tracked source snapshot; Docker ADD extracts original directory structure. No runtime secrets or databases included."
+  "source_commit": "3a4f51d6a3b09d74e5ddbb55bc09119b9fe502d0",
+  "archive_sha256": "2c9c8e95b6f7f3f2f42b8f3380c857201c24ed42f9e89fb57bfd2675dcbdd118",
+  "tests_passed": 150,
+  "packaging": "Tracked source snapshot. Automatic approval wait tracking; no staff date entry. No runtime secrets or database records included."
 }
