@@ -1,0 +1,12 @@
+
+/* Keep the page heading in flow above the greeting on desktop. */
+:root:has(.demo-banner[hidden]){--banner:0px}
+.topbar{flex-shrink:0;flex-wrap:wrap}
+.top-right{min-width:0;max-width:100%}
+.view[data-page="today"] .hello{min-width:0;padding-top:.25rem}
+.view[data-page="today"] .hello h2{white-space:normal;overflow-wrap:anywhere;line-height:1.3}
+@media(min-width:821px){
+ .topbar{position:relative;top:auto}
+ .view[data-page="today"]{padding-top:1.5rem}
+}
+
