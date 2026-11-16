@@ -26,6 +26,9 @@ RUN python3 /app/lead-aging-update.py && npm test
 # Owner-only staff monitoring, 7/14/30-day lead age options and simpler homepage.
 COPY owner-monitoring-update.py /app/owner-monitoring-update.py
 RUN python3 /app/owner-monitoring-update.py && npm test
+# Save operational updates independently from incomplete packet requirements.
+COPY pending-paperwork-save-update.py /app/pending-paperwork-save-update.py
+RUN python3 /app/pending-paperwork-save-update.py && npm test
 ENV NODE_ENV=production TZ=America/Los_Angeles TRANSCRIBE_LOCAL=true WHISPER_MODEL_DIR=/opt/whisper/tiny.en HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 EXPOSE 3000
 USER node
