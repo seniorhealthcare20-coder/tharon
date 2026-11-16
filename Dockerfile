@@ -15,6 +15,8 @@ COPY viewer-access-update.py /app/viewer-access-update.py
 RUN python3 /app/viewer-access-update.py
 # Add separate moved-in and lost filters; fail safely if source differs.
 RUN python3 -c 'from pathlib import Path; import json; p=Path("site/app.js"); s=p.read_text(); changes=json.loads('"'"'[["q:\'"'"'\'"'"',todayRep:", "q:\'"'"'\'"'"',closedOutcome:\'"'"'all\'"'"',todayRep:"], ["  if(UI.roadmapPhase", "  if(UI.closed&&UI.closedOutcome&&UI.closedOutcome!==\'"'"'all\'"'"')ls=ls.filter(l=>UI.closedOutcome===\'"'"'moved\'"'"'?l.stage===\'"'"'movein\'"'"':l.stage===\'"'"'lost\'"'"');\\n  if(!UI.closed){\\n  if(UI.roadmapPhase"], ["  if(UI.q){const q=UI.q.toLowerCase();", "  }\\n  if(UI.q){const q=UI.q.toLowerCase();"], ["    ${!UI.closed?`<label>Needs attention", "    ${UI.closed?`<label for=\\"closedOutcome\\">Outcome<select id=\\"closedOutcome\\" class=\\"input\\" data-change=\\"closedOutcome\\">${opt([[\'"'"'all\'"'"',\'"'"'All closed\'"'"'],[\'"'"'moved\'"'"',\'"'"'Moved in (won)\'"'"'],[\'"'"'lost\'"'"',\'"'"'Lost\'"'"']],UI.closedOutcome||\'"'"'all\'"'"')}</select></label>`:\'"'"'\'"'"'}\\n    ${!UI.closed?`<label>Needs attention"], ["  if(c===\'"'"'frep\'"'"')", "  if(c===\'"'"'closedOutcome\'"'"'){UI.closedOutcome=el.value;return render();}\\n  if(c===\'"'"'frep\'"'"')"]]'"'"'); exec("for old,new in changes:\n if s.count(old)!=1: raise SystemExit(\"Unexpected source; no deployment patch applied\")\n s=s.replace(old,new,1)"); p.write_text(s)'
+COPY personal-access-update.py /app/personal-access-update.py
+RUN python3 /app/personal-access-update.py && npm test
 ENV NODE_ENV=production TZ=America/Los_Angeles TRANSCRIBE_LOCAL=true WHISPER_MODEL_DIR=/opt/whisper/tiny.en HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 EXPOSE 3000
 USER node
