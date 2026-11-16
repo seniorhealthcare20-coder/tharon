@@ -29,6 +29,9 @@ RUN python3 /app/owner-monitoring-update.py && npm test
 # Save operational updates independently from incomplete packet requirements.
 COPY pending-paperwork-save-update.py /app/pending-paperwork-save-update.py
 RUN python3 /app/pending-paperwork-save-update.py && npm test
+# Named Zach lead editing, preserving private link and owner-only monitoring.
+COPY zach-edit-access-update.py /app/zach-edit-access-update.py
+RUN python3 /app/zach-edit-access-update.py && npm test
 ENV NODE_ENV=production TZ=America/Los_Angeles TRANSCRIBE_LOCAL=true WHISPER_MODEL_DIR=/opt/whisper/tiny.en HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 EXPOSE 3000
 USER node
