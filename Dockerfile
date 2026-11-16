@@ -20,6 +20,9 @@ RUN python3 /app/personal-access-update.py && npm test
 # Keep desktop Today header above the homepage greeting.
 COPY homepage-layout.css /app/homepage-layout.css
 RUN cat /app/homepage-layout.css >> /app/site/styles.css
+# Reviewed lead age and staff update tracking; no resident data migration.
+COPY lead-aging-update.py /app/lead-aging-update.py
+RUN python3 /app/lead-aging-update.py && npm test
 ENV NODE_ENV=production TZ=America/Los_Angeles TRANSCRIBE_LOCAL=true WHISPER_MODEL_DIR=/opt/whisper/tiny.en HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 EXPOSE 3000
 USER node
