@@ -49,6 +49,9 @@ RUN python3 /app/personal-marketer-dashboard-update.py && npm test
 # Add only the requested original lead-maker filter.
 COPY lead-maker-filter-update.py /app/lead-maker-filter-update.py
 RUN python3 /app/lead-maker-filter-update.py && npm test
+# Olivia sees her and Morgan leads outside Gaby buildings.
+COPY olivia-access-update.py /app/olivia-access-update.py
+RUN python3 /app/olivia-access-update.py && npm test
 ENV NODE_ENV=production TZ=America/Los_Angeles TRANSCRIBE_LOCAL=true WHISPER_MODEL_DIR=/opt/whisper/tiny.en HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 EXPOSE 3000
 USER node
