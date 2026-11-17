@@ -46,6 +46,9 @@ RUN python3 /app/homepage-referral-link-update.py && npm test
 # Steven-only marketer dashboard under More; no homepage clutter.
 COPY personal-marketer-dashboard-update.py /app/personal-marketer-dashboard-update.py
 RUN python3 /app/personal-marketer-dashboard-update.py && npm test
+# Add only the requested original lead-maker filter.
+COPY lead-maker-filter-update.py /app/lead-maker-filter-update.py
+RUN python3 /app/lead-maker-filter-update.py && npm test
 ENV NODE_ENV=production TZ=America/Los_Angeles TRANSCRIBE_LOCAL=true WHISPER_MODEL_DIR=/opt/whisper/tiny.en HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 EXPOSE 3000
 USER node
