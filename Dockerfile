@@ -61,6 +61,9 @@ RUN python3 /app/olivia-layout-update.py && npm test
 # LOA is a separate short-term hospital contract option for every building.
 COPY loa-program-update.py /app/loa-program-update.py
 RUN python3 /app/loa-program-update.py && npm test
+# Show LOA with a rate amount instead of a waiver tier.
+COPY loa-rate-update.py /app/loa-rate-update.py
+RUN python3 /app/loa-rate-update.py && npm test
 ENV NODE_ENV=production TZ=America/Los_Angeles TRANSCRIBE_LOCAL=true WHISPER_MODEL_DIR=/opt/whisper/tiny.en HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 EXPOSE 3000
 USER node
