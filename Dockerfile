@@ -37,6 +37,9 @@ RUN python3 /app/zach-edit-access-update.py && npm test
 # Simple approval-only filters and independent paperwork checkbox; Private Pay everywhere.
 COPY simple-referrals-update.py /app/simple-referrals-update.py
 RUN python3 /app/simple-referrals-update.py && npm test
+# Confirm scheduled move-in dates, flag overdue arrivals, and restore age shortcuts.
+COPY confirmed-movein-update.py /app/confirmed-movein-update.py
+RUN python3 /app/confirmed-movein-update.py && npm test
 ENV NODE_ENV=production TZ=America/Los_Angeles TRANSCRIBE_LOCAL=true WHISPER_MODEL_DIR=/opt/whisper/tiny.en HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 EXPOSE 3000
 USER node
