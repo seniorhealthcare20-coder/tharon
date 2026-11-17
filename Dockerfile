@@ -1,6 +1,8 @@
 FROM node:24-bookworm-slim
 RUN apt-get update && apt-get install -y --no-install-recommends python3 python3-venv libgomp1 ca-certificates && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
+# Build checks and runtime use the same Pacific calendar.
+ENV TZ=America/Los_Angeles
 ADD tharon-source.tar.gz ./
 RUN python3 -m venv /opt/speech && /opt/speech/bin/pip install --no-cache-dir -r /app/speech/requirements.txt
 # Download public model weights at build time. Runtime transcription is offline.
