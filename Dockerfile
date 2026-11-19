@@ -67,6 +67,9 @@ RUN python3 /app/loa-rate-update.py && npm test
 # Match the approved homepage count and list to referrals awaiting scheduling.
 COPY approved-unscheduled-update.py /app/approved-unscheduled-update.py
 RUN python3 /app/approved-unscheduled-update.py && npm test
+# Morgan edits every lead; cross-building duplicate warnings and reversible cleanup.
+COPY morgan-duplicates-update.py /app/morgan-duplicates-update.py
+RUN python3 /app/morgan-duplicates-update.py && npm test
 ENV NODE_ENV=production TZ=America/Los_Angeles TRANSCRIBE_LOCAL=true WHISPER_MODEL_DIR=/opt/whisper/tiny.en HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 EXPOSE 3000
 USER node
