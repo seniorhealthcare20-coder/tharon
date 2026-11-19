@@ -70,6 +70,9 @@ RUN python3 /app/approved-unscheduled-update.py && npm test
 # Morgan edits every lead; cross-building duplicate warnings and reversible cleanup.
 COPY morgan-duplicates-update.py /app/morgan-duplicates-update.py
 RUN python3 /app/morgan-duplicates-update.py && npm test
+# Flag likely spelling and familiar-name variants for human review.
+COPY duplicate-name-variants-update.py /app/duplicate-name-variants-update.py
+RUN python3 /app/duplicate-name-variants-update.py && npm test
 ENV NODE_ENV=production TZ=America/Los_Angeles TRANSCRIBE_LOCAL=true WHISPER_MODEL_DIR=/opt/whisper/tiny.en HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 EXPOSE 3000
 USER node
