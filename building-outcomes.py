@@ -26,3 +26,24 @@ for old,new in [
 p.write_text(s)
 with Path("site/styles.css").open("a") as f:
     f.write("\n.building-outcomes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem;margin-top:.6rem}.building-outcomes .btn{white-space:normal;text-align:start;justify-content:flex-start}\n")
+
+source = p.read_text()
+start = source.index('<section class="card"><h3>Lead profiles</h3>')
+end = source.index('</ul></section>',start)+len('</ul></section>')
+row_start = source.index('ls.map(l=>',start)+len('ls.map(')
+row_end = source.index(").join('')",row_start)
+row = source[row_start:row_end]
+source = source[:start] + '${buildingProfileGroups(ls)}' + source[end:]
+groups = """function buildingProfileGroups(leads){
+ const row=ROW;
+ const section=(title,items,empty,collapsed=false)=>{
+  const list=`<ul class="plain">${items.map(row).join('')||`<li class="muted">${empty}</li>`}</ul>`;
+  const label=`${title} (${items.length})`;
+  return collapsed?`<details class="card"><summary>${label}</summary>${list}</details>`:`<section class="card"><h3>${label}</h3>${list}</section>`;
+ };
+ return section('Active referrals',leads.filter(TL.isOpen),'No active referrals.')
+  +section('Moved in',leads.filter(l=>l.stage==='movein'),'No recorded move-ins.')
+  +section('Closed / lost',leads.filter(l=>l.stage==='lost'),'No lost referrals.',true);
+}
+""".replace('ROW',row)
+p.write_text(source.replace('V.building=function(id)',groups+'V.building=function(id)',1))
