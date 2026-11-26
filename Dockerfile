@@ -80,6 +80,8 @@ COPY open-age-update.py /app/open-age-update.py
 RUN python3 /app/open-age-update.py && npm test
 COPY close-referral-update.py /app/close-referral-update.py
 RUN python3 /app/close-referral-update.py && npm test
+COPY building-outcomes.py /app/building-outcomes.py
+RUN python3 /app/building-outcomes.py && npm test
 ENV NODE_ENV=production TZ=America/Los_Angeles TRANSCRIBE_LOCAL=true WHISPER_MODEL_DIR=/opt/whisper/tiny.en HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 EXPOSE 3000
 USER node
