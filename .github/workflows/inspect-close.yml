@@ -1,0 +1,17 @@
+name: Inspect referral outcome controls
+on:
+  push:
+    branches: [verify-referral-close]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Inspect outcome handlers in packaged source
+        run: |
+          tar -xOf tharon-source.tar.gz ./site/app.js > /tmp/app.js || tar -xOf tharon-source.tar.gz site/app.js > /tmp/app.js
+          grep -inE 'lostReason|markLost|closeLost|setStage|>Lost<|mark lost|close as lost|moveStage' /tmp/app.js | cut -c1-1200
