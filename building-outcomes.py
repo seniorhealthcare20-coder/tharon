@@ -47,3 +47,13 @@ groups = """function buildingProfileGroups(leads){
 }
 """.replace('ROW',row)
 p.write_text(source.replace('V.building=function(id)',groups+'V.building=function(id)',1))
+
+s = p.read_text()
+for old,new in [
+ ('<details class="building-group" open>','<details class="building-group">'),
+ ('<section class="card"><h3>No building assigned</h3>${unassigned.map(leadCard).join(\'\')}</section>',
+  '<details class="building-group"><summary>No building assigned <span class="chip">${unassigned.length}</span></summary><div class="building-group-body building-lead-grid">${unassigned.map(leadCard).join(\'\')}</div></details>'),
+ ("if(a==='simpleView'){UI.leadMaker='all';","if(a==='simpleView'){UI.view='buildings';UI.leadMaker='all';")]:
+    if s.count(old)!=1: raise ValueError(old)
+    s=s.replace(old,new)
+p.write_text(s)
