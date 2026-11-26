@@ -24,6 +24,7 @@ with tests.open("a") as out:
 test('open profiles offer a lost outcome and closed profiles leave the open list',()=>{
  const ctx=uiContext(), {V,UI,filtered}=ctx.simpleTest, tl=ctx.TL;
  const lead=tl.Lead('L_simple_old');
+ vm.runInContext(read('followup-contacts.js'),ctx);
  const button='data-act="reviewLostOutcome"';
  assert.ok(V.lead(lead.id).includes(button));
  tl.closeLead(lead.id,'lost',tl.LOST_REASONS[0]);
