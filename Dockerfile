@@ -76,6 +76,8 @@ RUN python3 /app/duplicate-name-variants-update.py && npm test
 # Olivia edits Morgan-owned leads only within her existing building scope.
 COPY olivia-edit-morgan-update.py /app/olivia-edit-morgan-update.py
 RUN python3 /app/olivia-edit-morgan-update.py && npm test
+COPY open-age-update.py /app/open-age-update.py
+RUN python3 /app/open-age-update.py && npm test
 ENV NODE_ENV=production TZ=America/Los_Angeles TRANSCRIBE_LOCAL=true WHISPER_MODEL_DIR=/opt/whisper/tiny.en HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 EXPOSE 3000
 USER node
